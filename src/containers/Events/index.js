@@ -14,16 +14,16 @@ const EventList = () => {
     const [type, setType] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
 
-    // Filtre par type sélectionné
+    // Filtre par type sélectionné et tri par label
     const filteredByType =
-        data?.events.filter((event) => (type ? event.type === type : true)) ||
-        [];
+        data?.events
+            ?.filter((event) => (type ? event.type === type : true))
+            .sort((a, b) => a.type.localeCompare(b.type)) || [];
 
     // Filtre par pagination
-    const paginatedEvents = filteredByType.filter(
-        (event, index) =>
-            (currentPage - 1) * PER_PAGE <= index &&
-            PER_PAGE * currentPage > index
+    const paginatedEvents = filteredByType.slice(
+        (currentPage - 1) * PER_PAGE,
+        currentPage * PER_PAGE
     );
 
     const changeType = (evtType) => {
@@ -46,9 +46,7 @@ const EventList = () => {
                     <h3 className="SelectTitle">Catégories</h3>
                     <Select
                         selection={typeList}
-                        onChange={(value) =>
-                            value ? changeType(value) : changeType(null)
-                        }
+                        onChange={(value) => changeType(value || null)}
                     />
                     <div id="events" className="ListContainer">
                         {paginatedEvents.map((event) => (
@@ -68,17 +66,19 @@ const EventList = () => {
                             </Modal>
                         ))}
                     </div>
-                    <div className="Pagination">
-                        {Array.from({ length: pageNumber }, (_, n) => (
-                            <a
-                                key={`page-${n + 1}`} // Clé unique pour chaque page
-                                href="#events"
-                                onClick={() => setCurrentPage(n + 1)}
-                            >
-                                {n + 1}
-                            </a>
-                        ))}
-                    </div>
+                    {filteredByType.length > PER_PAGE && (
+                        <div className="Pagination">
+                            {Array.from({ length: pageNumber }, (_, n) => (
+                                <a
+                                    key={`page-${n + 1}`}
+                                    href="#events"
+                                    onClick={() => setCurrentPage(n + 1)}
+                                >
+                                    {n + 1}
+                                </a>
+                            ))}
+                        </div>
+                    )}
                 </>
             )}
         </>

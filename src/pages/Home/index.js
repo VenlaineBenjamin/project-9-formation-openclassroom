@@ -9,11 +9,14 @@ import EventList from "../../containers/Events";
 import Form from "../../containers/Form";
 import Modal from "../../containers/Modal";
 import Slider from "../../containers/Slider";
-import { useData } from "../../contexts/DataContext";
 import "./style.scss";
 
 const Page = () => {
-    const { last } = useData();
+    const last = {
+        cover: "/path/to/cover-image.jpg",
+        title: "Event Title",
+        date: "2022-01-01",
+    };
     return (
         <>
             <header>
@@ -128,7 +131,7 @@ const Page = () => {
                     <h3>Notre derniére prestation</h3>
                     {last?.cover && (
                         <EventCard
-                            imageSrc={last.cover}
+                            imageSrc={last?.cover}
                             title={last.title}
                             date={new Date(last.date)}
                             small

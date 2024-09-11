@@ -13,13 +13,15 @@ const Select = ({
     label,
     type = "normal",
 }) => {
-    const [value, setValue] = useState();
+    const [value, setValue] = useState(null); // Initialisez la valeur à null ou à une valeur par défaut
     const [collapsed, setCollapsed] = useState(true);
+
     const changeValue = (newValue) => {
-        onChange();
-        setValue(newValue);
-        setCollapsed(newValue);
+        setValue(newValue); // Mettez à jour la valeur sélectionnée
+        setCollapsed(true); // Fermez la sélection après le choix
+        onChange(newValue); // Appelez la fonction onChange avec la nouvelle valeur
     };
+
     return (
         <div className={`SelectContainer ${type}`} data-testid="select-testid">
             {label && <div className="label">{label}</div>}
@@ -66,7 +68,7 @@ const Select = ({
                     className={collapsed ? "open" : "close"}
                     onClick={(e) => {
                         e.preventDefault();
-                        setCollapsed(!collapsed);
+                        setCollapsed(!collapsed); // Bascule l'état collapsed
                     }}
                 >
                     <Arrow />
@@ -75,7 +77,6 @@ const Select = ({
         </div>
     );
 };
-
 const Arrow = () => (
     <svg
         width="21"

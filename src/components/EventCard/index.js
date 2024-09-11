@@ -10,6 +10,7 @@ const EventCard = ({
     title,
     label,
     small = false,
+    context = "last event",
     ...props
 }) => (
     <div
@@ -22,6 +23,8 @@ const EventCard = ({
                 data-testid="card-image-testid"
                 src={imageSrc}
                 alt={imageAlt}
+                loading="lazy"
+                aria-label={`${title} image. ${context}`}
             />
             <div className="EventCard__label">{label}</div>
         </div>
@@ -39,11 +42,13 @@ EventCard.propTypes = {
     title: PropTypes.string.isRequired,
     small: PropTypes.bool,
     label: PropTypes.string.isRequired,
+    context: PropTypes.string,
 };
 
 EventCard.defaultProps = {
     imageAlt: "image",
     small: false,
+    context: "last event",
 };
 
 export default EventCard;
