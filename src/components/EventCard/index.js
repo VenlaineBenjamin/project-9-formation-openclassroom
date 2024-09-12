@@ -5,12 +5,12 @@ import "./style.scss";
 
 const EventCard = ({
     imageSrc,
-    imageAlt,
-    date = new Date(),
+    imageAlt = "image",
+    date = new Date().sort((a, b) => a - b), // Assuming this is meant to be `new Date()`
     title,
     label,
     small = false,
-    context = "last event",
+    context = "last",
     ...props
 }) => (
     <div
@@ -34,7 +34,6 @@ const EventCard = ({
         </div>
     </div>
 );
-
 EventCard.propTypes = {
     imageSrc: PropTypes.string.isRequired,
     imageAlt: PropTypes.string,

@@ -12,11 +12,39 @@ import Slider from "../../containers/Slider";
 import "./style.scss";
 
 const Page = () => {
-    const last = {
-        cover: "/path/to/cover-image.jpg",
-        title: "Event Title",
-        date: "2022-01-01",
-    };
+    const last = [
+        {
+            title: "Soirée d’entreprise",
+            date: "2021-01-01",
+            cover: "/images/priscilla-du-preez-Q7wGvnbuwj0-unsplash1.png",
+        },
+        {
+            title: "Conférences",
+            date: "2021-02-01",
+            cover: "/images/hall-expo.png",
+        },
+        {
+            title: "Experience digitale",
+            date: "2021-03-01",
+            cover: "/images/sophia-sideri-LFXMtUuAKK8-unsplash1.png",
+        },
+        {
+            title: "Soirée d’entreprise",
+            date: "2021-04-01",
+            cover: "/images/product-school-dJICd7b_LlE-unsplash.png",
+        },
+        {
+            title: "Conférences",
+            date: "2021-05-01",
+            cover: "/images/linkedin-sales-solutions-pAtA8xe_iVM-unsplash.png",
+        },
+        {
+            title: "Experience digitale",
+            date: "2021-06-01",
+            cover: "/images/product-school-nOvIa_x_tfo-unsplash.png",
+        },
+    ];
+    const lastCover = last[last.length - 1].cover;
     return (
         <>
             <header>
@@ -129,15 +157,13 @@ const Page = () => {
             <footer className="row">
                 <div className="col presta">
                     <h3>Notre derniére prestation</h3>
-                    {last?.cover && (
-                        <EventCard
-                            imageSrc={last?.cover}
-                            title={last.title}
-                            date={new Date(last.date)}
-                            small
-                            label="boom"
-                        />
-                    )}
+                    <EventCard
+                        imageSrc={lastCover}
+                        title={last[last.length - 1].title}
+                        date={new Date(last[last.length - 1].date)}
+                        label="last event"
+                        small
+                    />
                 </div>
                 <div className="col contact">
                     <h3>Contactez-nous</h3>
