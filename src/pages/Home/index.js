@@ -9,42 +9,11 @@ import EventList from "../../containers/Events";
 import Form from "../../containers/Form";
 import Modal from "../../containers/Modal";
 import Slider from "../../containers/Slider";
+import { useData } from "../../contexts/DataContext";
 import "./style.scss";
 
 const Page = () => {
-    const last = [
-        {
-            title: "Soirée d’entreprise",
-            date: "2021-01-01",
-            cover: "/images/priscilla-du-preez-Q7wGvnbuwj0-unsplash1.png",
-        },
-        {
-            title: "Conférences",
-            date: "2021-02-01",
-            cover: "/images/hall-expo.png",
-        },
-        {
-            title: "Experience digitale",
-            date: "2021-03-01",
-            cover: "/images/sophia-sideri-LFXMtUuAKK8-unsplash1.png",
-        },
-        {
-            title: "Soirée d’entreprise",
-            date: "2021-04-01",
-            cover: "/images/product-school-dJICd7b_LlE-unsplash.png",
-        },
-        {
-            title: "Conférences",
-            date: "2021-05-01",
-            cover: "/images/linkedin-sales-solutions-pAtA8xe_iVM-unsplash.png",
-        },
-        {
-            title: "Experience digitale",
-            date: "2021-06-01",
-            cover: "/images/product-school-nOvIa_x_tfo-unsplash.png",
-        },
-    ];
-    const lastCover = last[last.length - 1].cover;
+    const { last } = useData();
     return (
         <>
             <header>
@@ -158,11 +127,11 @@ const Page = () => {
                 <div className="col presta">
                     <h3>Notre derniére prestation</h3>
                     <EventCard
-                        imageSrc={lastCover}
-                        title={last[last.length - 1].title}
-                        date={new Date(last[last.length - 1].date)}
-                        label="last event"
+                        imageSrc={last?.cover ?? "/images/default-cover.png"}
+                        title={last?.title ?? "Titre par défaut"}
+                        date={new Date(last?.date)}
                         small
+                        label="boom"
                     />
                 </div>
                 <div className="col contact">
